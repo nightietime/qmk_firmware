@@ -29,7 +29,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 				SEND_STRING("git add ."SS_TAP(X_ENTER));
         break;
       case GIT_COMMIT:
-        SEND_STRING("git commit -m ");
+        SEND_STRING("git commit -m "SS_DOWN(X_LSHIFT)SS_TAP(X_QUOTE)SS_UP(X_LSHIFT));
         break;
       case GIT_PUSH:
         SEND_STRING("git push"SS_TAP(X_ENTER));
