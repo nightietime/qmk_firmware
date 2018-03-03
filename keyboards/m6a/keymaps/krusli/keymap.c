@@ -11,7 +11,9 @@ extern keymap_config_t keymap_config;
 // entirely and just use numbers.
 
 enum layers {
-  _LAYER0
+  _LAYER0,
+  _LAYER1,
+  _LAYER2
 };
 
 enum custom_keycodes {
@@ -46,14 +48,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	return true;
 };
 
-// // Fillers to make layering more clear
-// #define _______ KC_TRNS
-// #define XXXXXXX KC_NO
+#define _______ KC_TRNS
+#define XXXXXXX KC_NO
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_LAYER0] = KEYMAP(
-    GIT_ADD, GIT_COMMIT, GIT_PUSH,
-    FORTUNE, DISCORD,    KC_ENT
+    FORTUNE, DISCORD,    TO(_LAYER1),
+    GIT_ADD, GIT_COMMIT, GIT_PUSH
+  ),
+  [_LAYER1] = KEYMAP(
+    KC_VOLD, KC_VOLU, TO(_LAYER2),
+    KC_MRWD, KC_MPLY, KC_MNXT
+  ),
+  [_LAYER2] = KEYMAP(
+    _______, KC_UP,   TO(_LAYER0),
+    KC_LEFT, KC_DOWN, KC_RIGHT
   )
 };
 
