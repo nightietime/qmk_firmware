@@ -15,15 +15,32 @@ enum layers {
 };
 
 enum custom_keycodes {
-	MY_CUSTOM_MACRO = SAFE_RANGE
+  GIT_ADD = SAFE_RANGE,
+  GIT_COMMIT,
+  GIT_PUSH,
+  FORTUNE,
+  DISCORD
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	if (record->event.pressed) {
 		switch(keycode) {
-			case MY_CUSTOM_MACRO:
-				SEND_STRING("QMK is the best thing ever!"); // this is our macro!
-				return false;
+			case GIT_ADD:
+				SEND_STRING("git add ."SS_TAP(X_ENTER));
+        break;
+      case GIT_COMMIT:
+        SEND_STRING("git commit -m ");
+        break;
+      case GIT_PUSH:
+        SEND_STRING("git push"SS_TAP(X_ENTER));
+        break;
+      case FORTUNE:
+        SEND_STRING("/fortune"SS_TAP(X_ENTER));
+        break;
+      case DISCORD:
+        SEND_STRING("/discord"SS_TAP(X_ENTER));
+        break;
+      return false;
 		}
 	}
 	return true;
@@ -35,8 +52,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_LAYER0] = KEYMAP(
-    MY_CUSTOM_MACRO, KC_B, KC_C,
-    KC_D, KC_E, KC_F
+    GIT_ADD, GIT_COMMIT, GIT_PUSH,
+    FORTUNE, DISCORD,    KC_ENT
   )
 };
 
